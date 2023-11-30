@@ -114,8 +114,47 @@ tabsContainer.addEventListener('click', function (e) {
 });
 
 // Menu fade animation
+const handleHover = function (e) {
+  // console.log(this, e.currentTarget);
+
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
+  }
+};
+
+// Passing "argument" into handler
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
+
+// Sticky navigation
+// const initialCoords = section1.getBoundingClientRect();
+// console.log(initialCoords);
+
+// window.addEventListener('scroll', function () {
+//   console.log(window.scrollY);
+
+//   if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+//   else nav.classList.remove('sticky');
+// });
+
+// STICKY NAVIGATION: INTERSECTION OBSERVER API
+const obsCallback = function (entries, observer) {};
+const ObsOptions = {
+  root: null,
+  threshold: 0.1,
+};
+const observer = new IntersectionObserver(obsCallback, ObsOptions);
+observer.observe(section1);
 
 /*
+
 // *********************************
 // ADVANCE DOM & EVENTS
 // Selecting, Creating and Deleting elements
